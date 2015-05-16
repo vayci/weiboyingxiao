@@ -192,7 +192,7 @@ var taskService = taskService || {};
             if (!currentUserId) {
 
                 accountService.getAll().then(function(accounts) {
-                    if (!accounts) {
+                    if (accounts.length === 0) {
                         chromeService.showNotificaton("执行任务失败，请先添加微博账号！");
                     } else {
                         accountService.getAvailableUserId(accounts, type)
@@ -216,7 +216,7 @@ var taskService = taskService || {};
                 sinaService[type](task, currentUserId, account.token)
                     .then(function(result) {
 
-                        logService.add("执行任务: " + task.statusId + "成功！");
+                        logService.add("执行任务" + task.statusId + "成功！");
                         var date = new Date();
                         taskService.update(task.id, {
                             status: "已完成",
@@ -253,7 +253,7 @@ var taskService = taskService || {};
                                 break;
                         }
 
-                        logService.add("执行任务: " + task.statusId + "失败，原因:" + reason);
+                        logService.add("执行任务" + task.statusId + "失败，原因:" + reason);
 
                         var date = new Date();
                         taskService.update(task.id, {

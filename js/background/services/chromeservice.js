@@ -164,7 +164,7 @@ var chromeService = chromeService || {};
                         });
                         break;
                     case "showNotificaton":
-                        this.showNotificaton(request.message);
+                        customerService.showNotificaton(request.message);
                         sendResponse({
                             isSuccess: true
                         });
