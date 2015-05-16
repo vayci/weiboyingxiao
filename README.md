@@ -5,7 +5,7 @@ A Chrome extension you can use to broadcast your information to Sina Weibo users
 
 You can type these commands in the shell, no matter whether it is under mac os or windows.
 
-* cd ~/weiboyingxiao
+* cd weiboyingxiao
 * gulp
 
 
