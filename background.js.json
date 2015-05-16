@@ -1,0 +1,12 @@
+[
+    "bower_components/jquery/dist/jquery.js",
+    "bower_components/dexie/dist/latest/dexie.js",
+    "js/background/services/accountservice.js",
+    "js/background/services/chromeservice.js",
+    "js/background/services/customerservice.js",
+    "js/background/services/logservice.js",
+    "js/background/services/sinaservice.js",
+    "js/background/services/taskservice.js",
+    "js/background/sinasdk.js",
+    "js/background/main.js"
+]

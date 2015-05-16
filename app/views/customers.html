@@ -1,0 +1,241 @@
+<div class="container" ng-controller="CustomersController">
+    <div class="page-header">
+        <h1>用户微博列表</h1>
+    </div>
+    <p class="alert alert-danger">请通过搜索功能筛选需要营销的用户。收听数超过500或者少于50的用户是僵尸粉的概率比较大，粉丝数超过3000或者少于50的账号也不是您的目标用户。
+        <br>您可以通过给他们评论或者点赞来引起他们的注意，提高自己微博内容的曝光率。</p>
+    <div class="well form-search">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+              关键字
+            </span>
+                    <input type="text" ng-model="searchConditions.keywords" class="form-control" placeholder="用空格隔开">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                过滤词
+              </span>
+                    <input type="text" ng-model="searchConditions.filters" class="form-control" placeholder="用空格隔开">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group number-filter">
+                    <input type="number" string-to-number min="0" placeholder="最小数" ng-model="searchConditions.statusesCountMin" class="form-control">
+                    <span class="input-group-addon">
+                &lt;= 微博数 &lt;=
+              </span>
+                    <input type="number" string-to-number min="1" placeholder="最大数" ng-model="searchConditions.statusesCountMax" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group number-filter">
+                    <input type="number" string-to-number min="0" placeholder="最小数" ng-model="searchConditions.commentsCountMin" class="form-control">
+                    <span class="input-group-addon">
+                &lt;= 评论数 &lt;=
+              </span>
+                    <input type="number" string-to-number min="0" placeholder="最大数" ng-model="searchConditions.commentsCountMax" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group number-filter">
+                    <input type="number" string-to-number min="0" placeholder="最小数" ng-model="searchConditions.repostsCountMin" class="form-control">
+                    <span class="input-group-addon">
+                &lt;= 转发数 &lt;=
+              </span>
+                    <input type="number" string-to-number min="0" placeholder="最大数" ng-model="searchConditions.repostsCountMax" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group number-filter">
+                    <input type="number" string-to-number min="0" placeholder="最小数" ng-model="searchConditions.attitudesCountMin" class="form-control">
+                    <span class="input-group-addon">
+                &lt;= 点赞数 &lt;=
+              </span>
+                    <input type="number" string-to-number min="0" placeholder="最大数" ng-model="searchConditions.attitudesCountMax" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group number-filter">
+                    <input type="number" string-to-number min="0" placeholder="最小数" ng-model="searchConditions.followersCountMin" class="form-control">
+                    <span class="input-group-addon">
+                &lt;= 粉丝数 &lt;=
+              </span>
+                    <input type="number" string-to-number min="0" placeholder="最大数" ng-model="searchConditions.followersCountMax" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+                <div class="input-group number-filter">
+                    <input type="number" string-to-number min="0" placeholder="最小数" ng-model="searchConditions.friendsCountMin" class="form-control">
+                    <span class="input-group-addon">
+                &lt;= 收听数 &lt;=
+              </span>
+                    <input type="number" string-to-number min="0" placeholder="最大数" ng-model="searchConditions.friendsCountMax" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-2">
+                <select ng-model="searchConditions.gender" class="form-control">
+                    <option value="">性别</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-sm-2">
+                <button ng-click="resetSearch()" class="btn btn-default">重置</button>
+                <button ng-click="search()" class="btn btn-primary">搜索</button>
+            </div>
+        </div>
+    </div>
+    <p>
+        <button class="btn btn-danger" ng-click="deleteCustomers()">删除</button>
+        <button class="btn btn-primary" ng-click="comment()">评论</button>
+        <button class="btn btn-primary" ng-click="praise()">点赞</button>
+        <button class="btn btn-primary" ng-click="forward()">转发</button>
+        <button class="btn btn-primary" ng-click="message()">私信</button>
+        <button class="btn btn-warning" ng-click="follow()">收听</button> 总共用户微博数：{{ count }}，每页50条用户微博
+    </p>
+    <p class="alert alert-info text-center alert-select-all" ng-show="allInCurrentPageSelected && count > customers.length">
+        <span ng-show="!allSelected">已勾选本页 {{ customers.length }} 条用户微博，
+        <a ng-click="selectAll()">勾选全部 {{ count }} 条用户微博</a></span>
+        <span ng-show="allSelected">已勾选 {{ count }} 条用户微博，
+        <a ng-click="cancelSelectAll()">取消勾选</a></span>
+    </p>
+    <div class="table-responsive">
+        <table st-table="customers" st-pipe="callServer" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" ng-model="allInCurrentPageSelected">
+                    </th>
+                    <th>头像</th>
+                    <th>简介</th>
+                    <th>微博内容</th>
+                    <th>关键字</th>
+                    <th>时间</th>
+                    <th>来源</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in customers">
+                    <td>
+                        <input type="checkbox" ng-model="row.isSelected">
+                    </td>
+                    <td>
+                        <a href="{{row.url}}" target="_blank">
+                            <img ng-src="{{row.profileImageUrl}}"></a>
+                    </td>
+                    <td style="width: 320px;">
+                        <strong><a href="{{row.url}}" target="_blank">{{row.screenName}}</a></strong><span>（uid：{{ row.userId }}）</span>
+                        <ul class="param">
+                            <li><strong>性别：</strong> {{ getGender(row.gender) }}</li>
+                            <li><strong>收听数：</strong> {{ row.friendsCount }}</li>
+                            <li><strong>粉丝数：</strong> {{ row.followersCount }}</li>
+                            <li><strong>微博数：</strong> {{ row.statusesCount }}</li>
+                            <li><strong>评论数：</strong> {{ row.commentsCount }}</li>
+                            <li><strong>转发数：</strong> {{ row.repostsCount }}</li>
+                            <li><strong>点赞数：</strong> {{ row.attitudesCount }}</li>
+                            <li ng-show="row.location"><strong>地址：</strong> {{ row.location }}</li>
+                            <li ng-show="row.school"><strong>学校：</strong> {{ row.school }}</li>
+                            <li ng-show="row.company"><strong>公司：</strong> {{ row.company }}</li>
+                        </ul>
+                        <p><strong>简介：</strong> {{ row.description }}</p>
+                    </td>
+                    <td>
+                        <div class="content" ng-bind-html="row.content"></div>
+                        <a target="_blank" href="{{ row.statusLink }}">微博详细&gt;&gt;</a>
+                        <hr>
+                        <p>
+                            <button class="btn btn-danger" ng-click="deleteCustomers(row.id)">删除</button>
+                            <button class="btn btn-primary" ng-click="comment($index)">评论</button>
+                            <button class="btn btn-primary" ng-click="praise($index)">点赞</button>
+                            <button class="btn btn-primary" ng-click="forward($index)">转发</button>
+                            <button class="btn btn-primary" ng-click="message($index)">私信</button>
+                            <button class="btn btn-warning" ng-click="follow($index)">收听</button>
+                        </p>
+                    </td>
+                    <td>{{ row.keywords }}</td>
+                    <td>{{ row.createdAt }}</td>
+                    <td>{{ row.source }}</td>
+                </tr>
+                <tr ng-show="customers.length === 0">
+                    <td class="text-center" colspan="19">
+                        没有符合条件的用户微博数据。如需采集数据，<a href="http://www.weiboyingxiao.info/#help" target="_blank">请点击查看帮助</a>。
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="text-center" st-pagination="" st-items-by-page="50" colspan="19" st-displayed-pages="20">
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script type="text/ng-template" id="comment-modal.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">关闭</span>
+            </button>
+            <h4 class="modal-title">评论微博</h4>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">注意：重复的内容容易被新浪微博平台识别为广告营销评论，建议使用随机评论。</div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="useRandomContent">使用随机内容评论（<a ng-href="#/app/settings" target="_blank">设置</a>）
+                </label>
+            </div>
+            <textarea ng-model="content" ng-show="!useRandomContent" placeholder="评论内容" maxlength="169"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+            <button type="button" class="btn btn-primary" ng-click="ok()">发送</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="forward-modal.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">关闭</span>
+            </button>
+            <h4 class="modal-title">转发微博</h4>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">注意：重复的内容容易被新浪微博平台识别为广告营销评论，建议使用随机评论。</div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="useRandomContent">使用随机内容评论（<a ng-href="#/app/settings" target="_blank">设置</a>）
+                </label>
+            </div>
+            <textarea ng-model="content" ng-show="!useRandomContent" placeholder="评论内容" maxlength="169"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+            <button type="button" class="btn btn-primary" ng-click="ok()">发送</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="message-modal.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">关闭</span>
+            </button>
+            <h4 class="modal-title">发送私信</h4>
+        </div>
+        <div class="modal-body">
+            <textarea ng-model="content" placeholder="私信内容" maxlength="250"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+            <button type="button" class="btn btn-primary" ng-click="ok()">发送</button>
+        </div>
+    </script>
+</div>

@@ -1,0 +1,91 @@
+<div class="container" ng-controller="TasksController">
+    <div class="page-header">
+        <h1>任务列表</h1>
+    </div>
+    <p class="alert alert-danger">所有的任务都按照一定的时间间隔执行，防止操作过快被新浪微博屏蔽。 如果账号在执行任务时出现异常，程序将会出于保护账号而自动暂停该账号部分功能，可以到<a ng-href="#/app/accounts" title="我的微博账号列表" class="ng-binding">我的微博账号列表</a>重新启用账号。</p>
+    <div class="well form-search">
+        <div class="row">
+            <div class="col-lg-2 col-sm-2">
+                <select ng-model="searchConditions.taskType" class="form-control">
+                    <option value="">类型</option>
+                    <option value="praise">点赞</option>
+                    <option value="comment">评论</option>
+                    <option value="forward">转发</option>
+                    <option value="follow">收听</option>
+                    <option value="message">私信</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-sm-2">
+                <select ng-model="searchConditions.taskStatus" class="form-control">
+                    <option value="">状态</option>
+                    <option value="等待执行">等待执行</option>
+                    <option value="已完成">已完成</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-sm-2">
+                <button ng-click="search()" class="btn btn-primary">搜索</button>
+            </div>
+        </div>
+    </div>
+    <p>
+        <button ng-click="deleteTasks()" class="btn btn-danger">删除</button>
+        总共任务数：{{ count }}
+    </p>
+    <p class="alert alert-info text-center alert-select-all" ng-show="allInCurrentPageSelected && count > tasks.length">
+        <span ng-show="!allSelected">已勾选本页 {{ tasks.length }} 条任务，
+        <a ng-click="selectAll()">勾选全部 {{ count }} 条任务</a></span>
+        <span ng-show="allSelected">已勾选 {{ count }} 条任务，
+        <a ng-click="cancelSelectAll()">取消勾选</a></span>
+    </p>
+    <div class="table-responsive">
+        <table st-table="tasks" st-pipe="callServer" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" ng-model="allInCurrentPageSelected">
+                    </th>
+                    <th>uid</th>
+                    <th>微博内容</th>
+                    <th>消息</th>
+                    <th>添加时间</th>
+                    <th>执行时间</th>
+                    <th>失败次数</th>
+                    <th>状态</th>
+                    <th>执行账号</th>
+                    <th>类型</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in tasks">
+                    <td>
+                        <input type="checkbox" ng-model="row.isSelected">
+                    </td>
+                    <td>{{row.userId}}</td>
+                    <td>
+                        <div class="content" ng-bind-html="row.statusContent"></div>
+                        <a target="_blank" href="{{ row.statusLink }}">微博详细&gt;&gt;</a>
+                    </td>
+                    <td>{{row.content}}</td>
+                    <td>{{row.createdAt}}</td>
+                    <td>{{row.triggerTime}}</td>
+                    <td>{{row.failedTimes}}</td>
+                    <td><span class="{{ getStatusCss(row.status) }}">{{row.status}}</span></td>
+                    <td>{{row.executeUserId}}</td>
+                    <td>{{ getTypeText(row.type) }}</td>
+                </tr>
+                <tr ng-show="tasks.length == 0">
+                    <td class="text-center" colspan="10">
+                        暂无可执行的任务，如需添加任务，请到<a ng-href="#/app/customers">用户的微博列表</a>操作。
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="text-center" st-pagination="" st-items-by-page="50" colspan="10" st-displayed-pages="30">
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

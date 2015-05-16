@@ -1,0 +1,30 @@
+<div class="container" ng-controller="SettingsController">
+    <div class="page-header">
+        <h1>设置</h1>
+    </div>
+    <div class="form-group">
+        <label>点赞任务执行时间间隔（单位：秒）</label>
+        <input type="number" class="form-control" string-to-number ng-model="settings.praiseIntervalTime" min="10" max="10000" value="15">
+    </div>
+    <div class="form-group">
+        <label>评论任务执行时间间隔（单位：秒）</label>
+        <input type="number" class="form-control" string-to-number ng-model="settings.commentIntervalTime" min="10" max="10000" value="30">
+    </div>
+    <div class="form-group">
+        <label>收听任务执行时间间隔（单位：秒）</label>
+        <input type="number" class="form-control" string-to-number ng-model="settings.followIntervalTime" min="10" max="10000" value="15">
+    </div>
+    <div class="form-group">
+        <label>转发任务执行时间间隔（单位：秒）</label>
+        <input type="number" class="form-control" string-to-number ng-model="settings.forwardIntervalTime" min="10" max="10000" value="30">
+    </div>
+    <div class="form-group">
+        <label>私信任务执行时间间隔（单位：秒）</label>
+        <input type="number" class="form-control" string-to-number ng-model="settings.messageIntervalTime" min="10" max="10000" value="30">
+    </div>
+    <div class="form-group">
+        <label>评论转发随机内容（一行就是一条）</label>
+            <textarea class="form-control" ng-model="settings.randomContents"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="update(settings)">保存</button>
+</div>

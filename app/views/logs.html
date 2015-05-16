@@ -1,0 +1,35 @@
+<div class="container" ng-controller="LogsController">
+    <div class="page-header">
+        <h1>日志列表</h1>
+    </div>
+    <p>
+        <button ng-click="deleteLogs()" class="btn btn-danger">清空</button> 总共日志数：{{ count }}
+    </p>
+    <div class="table-responsive">
+        <table st-table="logs" st-pipe="callServer" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>添加时间</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in logs">
+                    <td>{{row.createdAt}}</td>
+                    <td>{{row.content}}</td>
+                </tr>
+                <tr ng-show="logs.length === 0">
+                    <td class="text-center" colspan="2">
+                        暂无日志！
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot ng-show="logs.length > 0">
+                <tr>
+                    <td class="text-center" st-pagination="" st-items-by-page="50" colspan="2" st-displayed-pages="30">
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="container" ng-controller="NavigationController">
+    <div class="navbar-header">
+        <span class="navbar-brand">微博营销助手 <span class="label label-primary" id="accounts-status">v5.1</span></span>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li ng-class="getMenuItemPropClasses(item)"  ng-repeat="item in menuItems">
+                <a ng-href="{{$state.href(item.sref)}}" title="{{item.text}}">{{ item.text }}</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown hide" dropdown>
+                <a href="#" class="dropdown-toggle" dropdown-toggle>
+                    <span class="glyphicon glyphicon-bell"></span>
+                    <span class="label label-danger">11</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" class="list-group-item">
+                            <div class="media-box">
+                                <div class="pull-left">
+                                    <em class="glyphicon glyphicon-comment"></em>
+                                </div>
+                                <div class="media-box-body clearfix">
+                                    <p>评论</p>
+                                    <p class="text-muted">
+                                        今日已经评论 <span class="label label-danger">18</span> 条微博
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <div class="media-box">
+                                <div class="pull-left">
+                                    <em class="glyphicon glyphicon-thumbs-up"></em>
+                                </div>
+                                <div class="media-box-body clearfix">
+                                    <p>点赞</p>
+                                    <p class="text-muted">
+                                        今日已经点赞 <span class="label label-danger">18</span> 条微博
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <div class="media-box">
+                                <div class="pull-left">
+                                    <em class="glyphicon glyphicon-volume-up"></em>
+                                </div>
+                                <div class="media-box-body clearfix">
+                                    <p>收听</p>
+                                    <p class="text-muted">
+                                        今日已经收听 <span class="label label-danger">18</span> 条用户
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <div class="media-box">
+                                <div class="pull-left">
+                                    <em class="glyphicon glyphicon-share-alt"></em>
+                                </div>
+                                <div class="media-box-body clearfix">
+                                    <p>转发</p>
+                                    <p class="text-muted">
+                                        今日已经转发 <span class="label label-danger">18</span> 条微博
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown" dropdown>
+                <a href="#" class="dropdown-toggle" dropdown-toggle>
+                    <span>更多</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a ng-href="{{$state.href('app.settings')}}">设置</a></li>
+                    <li><a href="{{$state.href('app.logs')}}">日志</a></li>
+                    <li><a href="http://www.weiboyingxiao.info/#help" target="_blank">帮助</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
