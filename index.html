@@ -8,9 +8,7 @@
     <title>微博营销助手 - 简单 快捷 有效</title>
     <link href="assets/img/logo.png" rel="shortcut icon">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/icomoon.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
     <script src="assets/js/modernizr.custom.js"></script>
     <script>
     (function(i, s, o, g, r, a, m) {
@@ -23,7 +21,7 @@
         a.async = 1;
         a.src = g;
         m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-56828794-3', 'auto');
     ga('send', 'pageview');
@@ -35,9 +33,7 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
                 </button>
                 <a class="navbar-brand" href="#"><span class="logo"></span> <b>微博营销助手</b></a>
             </div>
@@ -84,18 +80,10 @@
         <div class="installwrap">
             <div class="container text-center">
                 <h2>安装</h2>
-                <p>请根据不同浏览器选择对应的安装途径</p>
                 <span class="underline"></span>
                 <div class="row">
-                    <div class="col-xs-12 col-md-4">
-                        <a href="https://chrome.google.com/webstore/detail/微博营销助手/chlobbjclmajioehogliplcpofcaomdm" class="btn btn-install" target="_blank" role="button">Chrome网上应用店 v5.2</a>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <a href="https://ext.se.360.cn/webstore/detail/chlobbjclmajioehogliplcpofcaomdm" class="btn btn-install" target="_blank" role="button">360应用市场 v4.8</a>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <a href="chlobbjclmajioehogliplcpofcaomdm_main.crx" class="btn btn-install" target="_blank" role="button"><span class="glyphicon glyphicon-download"></span> 安装包下载 v5.2</a>
-                    </div>
+                    <a href="https://chrome.google.com/webstore/detail/微博营销助手/chlobbjclmajioehogliplcpofcaomdm" class="btn btn-install" target="_blank" role="button">Chrome网上应用店</a>
+                    <a href="chlobbjclmajioehogliplcpofcaomdm_main.crx" class="btn btn-install" target="_blank" role="button">安装包下载</a>
                 </div>
             </div>
         </div>
@@ -105,7 +93,6 @@
             <div class="container">
                 <div class="text-center">
                     <h2>帮助</h2>
-                    <p>动画演示上手更快</p>
                     <span class="underline"></span>
                 </div>
                 <div class="row">
@@ -114,7 +101,7 @@
                     </div>
                     <div class="col-lg-4">
                         <h3>1. 搜索微博获取用户</h3>
-                        <p>打开微博搜索(<a href="http://s.weibo.com" target="_blank">http://s.weibo.com</a>)页面，输入关键字搜索相关微博。点击浏览器上面的插件图标，在弹出的窗口上面点击“提取用户”。这时插件将会自动提取前30页的微博。</p>
+                        <p>登录微博账号，打开微博搜索(<a href="http://s.weibo.com" target="_blank">http://s.weibo.com</a>)页面，输入关键字搜索相关微博。点击浏览器上面的插件图标，在弹出的窗口上面点击“提取数据”。这时插件将会自动提取前50页的微博。</p>
                     </div>
                 </div>
                 <br>
@@ -122,9 +109,9 @@
                 <br>
                 <div class="row">
                     <div class="col-lg-4">
-                        <h3>2. 筛选用户后点赞评论转发收听</h3>
-                        <p>点击”查看用户“按钮可看到从微博搜索中提取到的用户。在用户列表页面可以按搜索条件筛选用户并可选择相应用户进行操作。</p>
-                        <p>选择相应用户后，可以点击评论或者点赞。插件图标上面将会实时显示未完成的任务数。为了防止点赞过快被新浪当做机器人，插件默认每隔10秒钟执行一次任务。</p>
+                        <h3>2. 筛选用户执行任务</h3>
+                        <p>点击”进入管理界面“按钮可看到从微博搜索中提取到的用户。在用户列表页面可以按搜索条件筛选用户并可选择相应用户进行操作。</p>
+                        <p>选择相应用户后，可以点击评论或者点赞。插件图标上面将会实时显示未完成的任务数。为了防止点赞过快被新浪当做机器人，插件默认每隔30秒钟执行一次任务。</p>
                     </div>
                     <div class="col-lg-8">
                         <img class="img-responsive right" src="assets/img/do-tasks.gif" alt="">
@@ -182,4 +169,5 @@
     <script src="assets/js/main.js"></script>
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4d75ac6e53ffa896" async="async"></script>
 </body>
+
 </html>
