@@ -177,6 +177,8 @@ var sinaService = sinaService || {};
                 var location = jqXHR.getResponseHeader("redirect-location");
                 if (location === "http://weibo.com/unfreeze") {
                     reject("账号冻结");
+                } else {
+                    reject("账号未登录");
                 }
             });
         });

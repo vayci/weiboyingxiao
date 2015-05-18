@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     PluginError = gutil.PluginError;
 
 // production mode (see build task)
-var isProduction = true;
+var isProduction = false;
 var useSourceMaps = false;
 
 // JS APP
