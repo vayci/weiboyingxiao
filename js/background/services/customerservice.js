@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var customerService = customerService || {};
 
@@ -7,7 +7,7 @@ var customerService = customerService || {};
 
     this.add = function(customer) {
 
-        db.customers.where("statusId").equals(customer.statusId)
+        db.customers.where('statusId').equals(customer.statusId)
             .count(function(count) {
                 if (count == 0) {
                     db.customers.add(customer);
@@ -19,7 +19,7 @@ var customerService = customerService || {};
     var containsKeywords = function(customer, keywords) {
         var allContent = (customer.screenName + customer.content + customer.description + customer.source + customer.school + customer.company + customer.location).toLowerCase();
 
-        var splitted = keywords.toLowerCase().split(" ");
+        var splitted = keywords.toLowerCase().split(' ');
         for (var i in splitted) {
             if (!allContent.indexOf(splitted[i]) != -1) {
                 return false;
@@ -30,7 +30,7 @@ var customerService = customerService || {};
     };
 
     var containsFilters = function(input, keywords) {
-        var splitted = keywords.toLowerCase().split(" ");
+        var splitted = keywords.toLowerCase().split(' ');
         input = input.toLowerCase();
         for (var i in splitted) {
             if (input.indexOf(splitted[i]) != -1) {

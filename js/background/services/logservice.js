@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var logService = logService || {};
 
@@ -7,7 +7,7 @@ var logService = logService || {};
     this.getAll = function(start, pageSize) {
 
         var count = db.logs.toCollection().count();
-        var logs = db.logs.orderBy("id").desc()
+        var logs = db.logs.orderBy('id').desc()
             .offset(start)
             .limit(pageSize)
             .toArray();

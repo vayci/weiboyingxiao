@@ -1,12 +1,13 @@
-var App = angular.module('weiboMarketing', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngSanitize', 
-    'ngCookies', 'ui.bootstrap', 'ui.router', 'ngResource', 'xeditable', 'toastr', 'smart-table'])
+var App = angular.module('weiboMarketing', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngSanitize',
+        'ngCookies', 'ui.bootstrap', 'ui.router', 'ngResource', 'xeditable', 'toastr', 'smart-table'
+    ])
     .config([
         '$compileProvider',
         function($compileProvider) {
             $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
         }
     ])
-    .run(["$rootScope", "$state", "$stateParams", '$window', 'editableOptions', function($rootScope, $state, $stateParams, $window, editableOptions) {
+    .run(['$rootScope', '$state', '$stateParams', '$window', 'editableOptions', function($rootScope, $state, $stateParams, $window, editableOptions) {
 
         editableOptions.theme = 'bs3';
 

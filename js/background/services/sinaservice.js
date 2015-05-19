@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 var sinaService = sinaService || {};
 
 (function() {
 
     var makeNonce = function(a) {
-        var b = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-            c = "";
+        var b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+            c = '';
         for (var d = 0; d < a; d++)
             c += b.charAt(Math.ceil(Math.random() * 1e6) % b.length);
         return c;
@@ -14,12 +14,12 @@ var sinaService = sinaService || {};
 
     function getPassword(pwd, servicetime, nonce, rsaPubkey) {
         var rsaKey = new sinaSSOEncoder.RSAKey();
-        rsaKey.setPublic(rsaPubkey, "10001");
-        return rsaKey.encrypt([servicetime, nonce].join("\t") + "\n" + pwd);
+        rsaKey.setPublic(rsaPubkey, '10001');
+        return rsaKey.encrypt([servicetime, nonce].join('\t') + '\n' + pwd);
     };
 
     var findUrls = function(text) {
-        var source = (text || "").toString();
+        var source = (text || '').toString();
         var urlArray = [];
         var url;
         var matchArray;
@@ -35,10 +35,10 @@ var sinaService = sinaService || {};
     };
 
     var removeUrlParameter = function(url, parameter) {
-        var urlparts = url.split("?");
+        var urlparts = url.split('?');
         if (urlparts.length >= 2) {
 
-            var prefix = encodeURIComponent(parameter) + "=";
+            var prefix = encodeURIComponent(parameter) + '=';
             var pars = urlparts[1].split(/[&;]/g);
 
             for (var i = pars.length; i-- > 0;) {
@@ -47,7 +47,7 @@ var sinaService = sinaService || {};
                 }
             }
 
-            return urlparts[0] + "?" + pars.join("&");
+            return urlparts[0] + '?' + pars.join('&');
         } else {
             return url;
         }
@@ -59,74 +59,74 @@ var sinaService = sinaService || {};
 
         // 2. login
         $.ajax({
-            url: "https://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.18)&__from=extension",
-            type: "POST",
+            url: 'https://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.18)&__from=extension',
+            type: 'POST',
             data: {
-                entry: "weibo",
+                entry: 'weibo',
                 gateway: 1,
-                from: "",
+                from: '',
                 savestate: 7,
                 userticket: 1,
-                pagerefer: "https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&ua=php-sso_sdk_client-0.6.9&_rand=" + Date.now(),
+                pagerefer: 'https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&ua=php-sso_sdk_client-0.6.9&_rand=' + Date.now(),
                 vsnf: 1,
                 su: su,
-                service: "miniblog",
+                service: 'miniblog',
                 servicetime: data.servertime,
                 nonce: nonce,
-                pwencode: "rsa2",
+                pwencode: 'rsa2',
                 pcid: pcid,
                 door: pincode,
                 rsakv: data.rsakv,
                 sp: getPassword(password, data.servertime, nonce, data.pubkey),
-                sr: "1920*1080",
-                encoding: "UTF-8",
-                prelt: "873",
-                url: "https://www.weibo.com/ajaxlogin.php?framelogin=1&callback=parent.sinaSSOController.feedBackUrlCallBack",
-                returntype: "META"
+                sr: '1920*1080',
+                encoding: 'UTF-8',
+                prelt: '873',
+                url: 'https://www.weibo.com/ajaxlogin.php?framelogin=1&callback=parent.sinaSSOController.feedBackUrlCallBack',
+                returntype: 'META'
             }
         }).done(function(result, textStatus, jqXHR) {
-            var url = findUrls($(result).text())[0].replace("http:", "https:") + "&__from=extension";
-            if (url.indexOf("retcode=4049") !== -1 || url.indexOf("retcode=2070") !== -1) {
-                localStorage.setItem(username + ":preLoginData", JSON.stringify(data));
+            var url = findUrls($(result).text())[0].replace('http:', 'https:') + '&__from=extension';
+            if (url.indexOf('retcode=4049') !== -1 || url.indexOf('retcode=2070') !== -1) {
+                localStorage.setItem(username + ':preLoginData', JSON.stringify(data));
                 resolve({
                     pcid: pcid
                 });
                 return;
             }
 
-            var loginCookies = jqXHR.getResponseHeader("extension-cookies");
+            var loginCookies = jqXHR.getResponseHeader('extension-cookies');
 
             // 3. cross login
             $.ajax({
                     url: url,
-                    type: "GET",
+                    type: 'GET',
                     headers: {
-                        "extension-cookies": loginCookies
+                        'extension-cookies': loginCookies
                     }
                 })
                 .done(function(result) {
                     // 4. save login state
                     url = findUrls($(result).text())[0];
-                    url = removeUrlParameter(url, "url") + "&callback=?&__from=extension";
+                    url = removeUrlParameter(url, 'url') + '&callback=?&__from=extension';
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open("GET", url, true);
-                    xhr.setRequestHeader("extension-cookies", loginCookies);
+                    xhr.open('GET', url, true);
+                    xhr.setRequestHeader('extension-cookies', loginCookies);
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === 4) {
                             resolve({
-                                token: xhr.getResponseHeader("token"),
-                                userinfo: JSON.parse(xhr.responseText.replace("(", "").replace(");", "")).userinfo
+                                token: xhr.getResponseHeader('token'),
+                                userinfo: JSON.parse(xhr.responseText.replace('(', '').replace(');', '')).userinfo
                             });
                         }
                     };
                     xhr.send();
                 })
                 .fail(function() {
-                    reject("登录失败");
+                    reject('登录失败');
                 });
         }).fail(function() {
-            reject("登录失败");
+            reject('登录失败');
         });
     };
 
@@ -135,10 +135,10 @@ var sinaService = sinaService || {};
         return new Promise(function(resolve, reject) {
 
             var su = sinaSSOEncoder.base64.encode(encodeURIComponent(username));
-            var url = "https://login.sina.com.cn/sso/prelogin.php?entry=weibo&su=" + su + "&rsakt=mod&client=ssologin.js(v1.4.18)&_=" + Date.now() + "&callback=?&__from=extension";
+            var url = 'https://login.sina.com.cn/sso/prelogin.php?entry=weibo&su=' + su + '&rsakt=mod&client=ssologin.js(v1.4.18)&_=' + Date.now() + '&callback=?&__from=extension';
 
             if (pincode) {
-                var data = JSON.parse(localStorage.getItem(username + ":preLoginData"));
+                var data = JSON.parse(localStorage.getItem(username + ':preLoginData'));
                 sendLoginRequest(data, su, username, password, pincode, resolve, reject);
 
                 return;
@@ -151,10 +151,10 @@ var sinaService = sinaService || {};
                     return;
                 }
 
-                sendLoginRequest(result, su, username, password, "", resolve, reject);
+                sendLoginRequest(result, su, username, password, '', resolve, reject);
 
             }).fail(function() {
-                reject("登录失败");
+                reject('登录失败');
             });
         });
     };
@@ -162,23 +162,23 @@ var sinaService = sinaService || {};
     this.isValidToken = function(token) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "http://www.weibo.com/aj/guide/bubblead?ajwvr=6&_t=0&__rnd=" + Date.now() + "&__from=extension",
-                type: "GET",
+                url: 'http://www.weibo.com/aj/guide/bubblead?ajwvr=6&_t=0&__rnd=' + Date.now() + '&__from=extension',
+                type: 'GET',
                 headers: {
-                    "extension-cookies": token
+                    'extension-cookies': token
                 }
             }).done(function(result) {
-                if (result.code === "100000") {
+                if (result.code === '100000') {
                     resolve();
                 } else {
                     reject(result.msg);
                 }
             }).fail(function(jqXHR) {
-                var location = jqXHR.getResponseHeader("redirect-location");
-                if (location === "http://weibo.com/unfreeze") {
-                    reject("账号冻结");
+                var location = jqXHR.getResponseHeader('redirect-location');
+                if (location === 'http://weibo.com/unfreeze') {
+                    reject('账号冻结');
                 } else {
-                    reject("账号未登录");
+                    reject('账号未登录');
                 }
             });
         });
@@ -190,34 +190,34 @@ var sinaService = sinaService || {};
     var postData = function(url, data, token) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: url + "&__from=extension",
-                type: "POST",
+                url: url + '&__from=extension',
+                type: 'POST',
                 headers: {
-                    "extension-cookies": token
+                    'extension-cookies': token
                 },
                 data: data
             }).done(function(result, textStatus, jqXHR) {
-                if (result.code === "100000") {
+                if (result.code === '100000') {
                     resolve(result);
                 } else {
                     reject(result.msg);
                 }
             }).fail(function(jqXHR) {
-                var location = jqXHR.getResponseHeader("redirect-location");
-                if (location === "http://weibo.com/unfreeze") {
-                    reject("账号冻结");
-                } else if (location.indexOf("http://weibo.com/login.php") !== -1) {
-                    reject("未登录");
+                var location = jqXHR.getResponseHeader('redirect-location');
+                if (location === 'http://weibo.com/unfreeze') {
+                    reject('账号冻结');
+                } else if (location.indexOf('http://weibo.com/login.php') !== -1) {
+                    reject('未登录');
                 } else {
-                    reject("网络异常");
+                    reject('网络异常');
                 }
             });
         });
     };
 
     var getRandomContent = function() {
-        var contents = localStorage.randomContents || "嗯，有道理～\n有空再看\n转发微博\n你很啰嗦啊。\n已阅。";
-        var lines = contents.split("\n").filter(function(item) {
+        var contents = localStorage.randomContents || '嗯，有道理～\n有空再看\n转发微博\n你很啰嗦啊。\n已阅。';
+        var lines = contents.split('\n').filter(function(item) {
             return item.length > 0;
         });
 
@@ -226,24 +226,24 @@ var sinaService = sinaService || {};
     };
 
     this.praise = function(task, userId, token) {
-        return postData("http://www.weibo.com/aj/v6/like/add?ajwvr=6", {
-            version: "mini",
-            qid: "heart",
-            location: "v6_content_home",
-            loc: "profile",
+        return postData('http://www.weibo.com/aj/v6/like/add?ajwvr=6', {
+            version: 'mini',
+            qid: 'heart',
+            location: 'v6_content_home',
+            loc: 'profile',
             mid: task.statusId
         }, token);
     };
 
     this.follow = function(task, userId, token) {
-        return postData("http://www.weibo.com/aj/f/followed?ajwvr=6&__rnd=" + Date.now(), {
+        return postData('http://www.weibo.com/aj/f/followed?ajwvr=6&__rnd=' + Date.now(), {
             uid: task.userId,
             oid: task.userId
         }, token);
     };
 
     this.unfollow = function(task, userId, token) {
-        return postData("http://www.weibo.com/aj/f/unfollow?ajwvr=6", {
+        return postData('http://www.weibo.com/aj/f/unfollow?ajwvr=6', {
             uid: task.userId,
             oid: task.userId
         }, token);
@@ -252,7 +252,7 @@ var sinaService = sinaService || {};
     this.forward = function(task, userId, token) {
         var content = task.useRandomContent ? getRandomContent() : task.content;
 
-        return postData("http://www.weibo.com/aj/v6/mblog/forward?ajwvr=6&__rnd=" + Date.now(), {
+        return postData('http://www.weibo.com/aj/v6/mblog/forward?ajwvr=6&__rnd=' + Date.now(), {
             mid: task.statusId,
             is_comment_base: 1,
             style_type: 2,
@@ -263,9 +263,9 @@ var sinaService = sinaService || {};
     };
 
     this.message = function(task, userId, token) {
-        return postData("http://www.weibo.com/aj/message/add?ajwvr=6&__rnd=" + Date.now(), {
-            location: "msgdialog",
-            module: "msgissue",
+        return postData('http://www.weibo.com/aj/message/add?ajwvr=6&__rnd=' + Date.now(), {
+            location: 'msgdialog',
+            module: 'msgissue',
             style_id: 1,
             _t: 0,
             uid: task.userId,
@@ -277,11 +277,11 @@ var sinaService = sinaService || {};
 
         var content = task.useRandomContent ? getRandomContent() : task.content;
 
-        return postData("http://www.weibo.com/aj/v6/comment/add?ajwvr=6&__rnd=" + Date.now(), {
-            act: "post",
+        return postData('http://www.weibo.com/aj/v6/comment/add?ajwvr=6&__rnd=' + Date.now(), {
+            act: 'post',
             forward: 0,
             isroot: 0,
-            pageid: "weibo",
+            pageid: 'weibo',
             _t: 0,
             mid: task.statusId,
             uid: userId,

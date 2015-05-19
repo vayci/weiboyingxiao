@@ -23,12 +23,12 @@
             <tbody>
                 <tr ng-repeat="account in accounts">
                     <td>
-                        <span editable-text="account.username" e-name="username" e-form="rowform" onbeforesave="checkName($data, account.id)" e-required>
+                        <span editable-text="account.username" e-name="username" e-form="rowform" onbeforesave="checkName($data, account.id)" e-required e-placeholder="用户名">
                     {{ account.username || '空值' }}
                   </span>
                     </td>
                     <td>
-                        <span editable-text="account.password" e-name="password" e-form="rowform" onbeforesave="checkPassword($data)" e-required>
+                        <span editable-text="account.password" e-name="password" e-form="rowform" onbeforesave="checkPassword($data)" e-required e-placeholder="密码">
                     {{ '********' || '空值' }}
                   </span>
                     </td>
@@ -84,7 +84,7 @@
                             {{ account.messageCount || 29 }}</a>
                             </li>
                         </ul>
-                        <a href="#" ng-click="showTaskLog(account)">详细</a>
+                        <a href="#" ng-click="showTaskLog(account)">任务执行情况</a>
                     </td>
                     <td class="operations">
                         <form editable-form="" name="rowform" onbeforesave="saveAccount($index, $data, account.id)" ng-show="rowform.$visible" shown="inserted == account" class="form-buttons form-inline">

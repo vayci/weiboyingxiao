@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 var chromeService = chromeService || {};
 
 (function() {
 
     this.showNotificaton = function(message) {
-        chrome.notifications.create("", {
-            type: "basic",
-            iconUrl: "icon48.png",
+        chrome.notifications.create('', {
+            type: 'basic',
+            iconUrl: 'icon48.png',
             title: '微博营销助手',
             message: message
         }, function() {});
@@ -39,35 +39,35 @@ var chromeService = chromeService || {};
             var setCookies = function() {
                 for (var i in requestHeaders) {
                     var header = requestHeaders[i];
-                    if (header.name === "extension-cookies") {
+                    if (header.name === 'extension-cookies') {
                         requestHeaders.splice(i, 1);
-                        modifyHeaders(requestHeaders, "Cookie", header.value);
+                        modifyHeaders(requestHeaders, 'Cookie', header.value);
                     }
                 }
             };
 
             setCookies();
 
-            if (details.url.indexOf("http://www.weibo.com/aj") !== -1) {
-                modifyHeaders(details.requestHeaders, "Referer", "http://www.weibo.com");
-                modifyHeaders(requestHeaders, "Origin", "http://www.weibo.com");
-            } else if (details.url.indexOf("https://login.sina.com.cn/crossdomain2.php") !== -1) {
-                modifyHeaders(details.requestHeaders, "Referer", "http://www.weibo.com");
-                modifyHeaders(requestHeaders, "Origin", "https://login.sina.com.cn");
-            } else if (details.url.indexOf("https://passport.weibo.com/wbsso/login?ssosavestate") !== -1) {
-                modifyHeaders(details.requestHeaders, "Referer", "http://www.weibo.com");
-                modifyHeaders(requestHeaders, "Origin", "https://passport.weibo.com");
+            if (details.url.indexOf('http://www.weibo.com/aj') !== -1) {
+                modifyHeaders(details.requestHeaders, 'Referer', 'http://www.weibo.com');
+                modifyHeaders(requestHeaders, 'Origin', 'http://www.weibo.com');
+            } else if (details.url.indexOf('https://login.sina.com.cn/crossdomain2.php') !== -1) {
+                modifyHeaders(details.requestHeaders, 'Referer', 'http://www.weibo.com');
+                modifyHeaders(requestHeaders, 'Origin', 'https://login.sina.com.cn');
+            } else if (details.url.indexOf('https://passport.weibo.com/wbsso/login?ssosavestate') !== -1) {
+                modifyHeaders(details.requestHeaders, 'Referer', 'http://www.weibo.com');
+                modifyHeaders(requestHeaders, 'Origin', 'https://passport.weibo.com');
             }
 
             return {
                 requestHeaders: requestHeaders
             };
         }, {
-            urls: ["http://www.weibo.com/aj*&__from=extension",
-                "https://login.sina.com.cn/*&__from=extension",
-                "https://passport.weibo.com/wbsso/login?ssosavestate*&__from=extension*"
+            urls: ['http://www.weibo.com/aj*&__from=extension',
+                'https://login.sina.com.cn/*&__from=extension',
+                'https://passport.weibo.com/wbsso/login?ssosavestate*&__from=extension*'
             ]
-        }, ["blocking", "requestHeaders"]);
+        }, ['blocking', 'requestHeaders']);
     };
 
     this.listenOnHeadersReceived = function() {
@@ -76,59 +76,59 @@ var chromeService = chromeService || {};
 
             var responseHeaders = details.responseHeaders;
 
-            if (details.url.indexOf("https://passport.weibo.com/wbsso/login?ssosavestate") != -1) {
+            if (details.url.indexOf('https://passport.weibo.com/wbsso/login?ssosavestate') != -1) {
 
                 // 登录最后一步获取登录Token
                 var token = '';
                 for (var i in responseHeaders) {
                     var header = responseHeaders[i];
-                    if (header.name === "Set-Cookie") {
+                    if (header.name === 'Set-Cookie') {
                         var value = header.value;
-                        if (value.indexOf("SUB=") !== -1) {
-                            token = value.substr(0, value.indexOf(";"));
+                        if (value.indexOf('SUB=') !== -1) {
+                            token = value.substr(0, value.indexOf(';'));
                         }
                     }
                 }
 
-                modifyHeaders(responseHeaders, "token", token);
+                modifyHeaders(responseHeaders, 'token', token);
 
-            } else if (details.url.indexOf("https://login.sina.com.cn/sso/login.php?client=ssologin.js") !== -1) {
+            } else if (details.url.indexOf('https://login.sina.com.cn/sso/login.php?client=ssologin.js') !== -1) {
 
-                var cookies = "";
+                var cookies = '';
                 for (var i in responseHeaders) {
                     var header = responseHeaders[i];
-                    if (header.name === "Set-Cookie") {
+                    if (header.name === 'Set-Cookie') {
 
                         var value = header.value;
-                        cookies += value.substr(0, value.indexOf(";") + 1);
+                        cookies += value.substr(0, value.indexOf(';') + 1);
                     }
                 }
 
-                modifyHeaders(responseHeaders, "extension-cookies", cookies);
+                modifyHeaders(responseHeaders, 'extension-cookies', cookies);
 
-            } else if (details.url.indexOf("http://www.weibo.com/aj") !== -1) {
+            } else if (details.url.indexOf('http://www.weibo.com/aj') !== -1) {
                 for (var i in responseHeaders) {
                     var header = responseHeaders[i];
-                    if (header.name === "Location") {
+                    if (header.name === 'Location') {
                         responseHeaders.splice(i, 1);
-                        modifyHeaders(responseHeaders, "redirect-location", header.value);
+                        modifyHeaders(responseHeaders, 'redirect-location', header.value);
                         break;
                     }
                 }
-                modifyHeaders(responseHeaders, "Content-Type", "application/json; charset=utf-8");
+                modifyHeaders(responseHeaders, 'Content-Type', 'application/json; charset=utf-8');
             }
 
-            modifyHeaders(responseHeaders, "Set-Cookie", "");
+            modifyHeaders(responseHeaders, 'Set-Cookie', '');
 
             return {
                 responseHeaders: responseHeaders
             };
         }, {
-            urls: ["http://www.weibo.com/aj*&__from=extension",
-                "https://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.18)&__from=extension",
-                "https://passport.weibo.com/wbsso/login?ssosavestate*&__from=extension*"
+            urls: ['http://www.weibo.com/aj*&__from=extension',
+                'https://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.18)&__from=extension',
+                'https://passport.weibo.com/wbsso/login?ssosavestate*&__from=extension*'
             ]
-        }, ["blocking", "responseHeaders"]);
+        }, ['blocking', 'responseHeaders']);
     };
 
     this.listenOnAlarm = function() {
@@ -157,38 +157,38 @@ var chromeService = chromeService || {};
         chrome.runtime.onMessage.addListener(
             function(request, sender, sendResponse) {
                 switch (request.method) {
-                    case "addCustomer":
+                    case 'addCustomer':
                         customerService.add(request.customer);
                         sendResponse({
                             isSuccess: true
                         });
                         break;
-                    case "showNotificaton":
+                    case 'showNotificaton':
                         customerService.showNotificaton(request.message);
                         sendResponse({
                             isSuccess: true
                         });
                         break;
-                    case "getCustomers":
+                    case 'getCustomers':
                         customerService.getAll(request.searchConditions, request.start, request.pageSize)
                             .then(function(data) {
                                 sendResponse(data);
                             });
                         break;
-                    case "deleteCustomers":
+                    case 'deleteCustomers':
                         customerService.removeAll(request.ids).then(function() {
                             sendResponse({
                                 isSuccess: true
                             });
                         });
                         break;
-                    case "addTasks":
+                    case 'addTasks':
                         taskService.addAll(request.type, request.content, request.useRandomContent, request.list);
                         sendResponse({
                             isSuccess: true
                         });
                         break;
-                    case "getTasks":
+                    case 'getTasks':
                         var searchConditions = request.searchConditions;
                         taskService.getAll(searchConditions.taskType,
                                 searchConditions.taskStatus,
@@ -197,54 +197,54 @@ var chromeService = chromeService || {};
                                 sendResponse(data);
                             });
                         break;
-                    case "deleteTasks":
+                    case 'deleteTasks':
                         taskService.removeAll(request.ids).then(function() {
                             sendResponse({
                                 isSuccess: true
                             });
                         });
                         break;
-                    case "restartTasks":
+                    case 'restartTasks':
                         taskService.restartAll();
                         sendResponse({
                             isSuccess: true
                         });
                         break;
-                    case "getLogs":
+                    case 'getLogs':
                         logService.getAll(request.start, request.pageSize)
                             .then(function(data) {
                                 sendResponse(data);
                             });
                         break;
-                    case "deleteLogs":
+                    case 'deleteLogs':
                         logService.removeAll().then(function() {
                             sendResponse({
                                 isSuccess: true
                             });
                         });
                         break;
-                    case "getAccounts":
+                    case 'getAccounts':
                         accountService.getAll().then(function(accounts) {
                             sendResponse({
                                 accounts: accounts
                             });
                         });
                         break;
-                    case "getTaskLogs":
+                    case 'getTaskLogs':
                         taskService.getLogs(request.userId).then(function(taskLogs) {
                             sendResponse({
                                 taskLogs: taskLogs
                             });
                         });
                         break;
-                    case "deleteAccount":
+                    case 'deleteAccount':
                         accountService.remove(request.id).then(function() {
                             sendResponse({
                                 isSuccess: true
                             });
                         });
                         break;
-                    case "addAccount":
+                    case 'addAccount':
                         var account = request.account;
                         accountService.add(account.username, account.password)
                             .then(function(accountId) {
@@ -254,14 +254,14 @@ var chromeService = chromeService || {};
                                 });
                             });
                         break;
-                    case "addAccounts":
+                    case 'addAccounts':
                         accountService.addAll(request.accounts).then(function(accounts) {
                             sendResponse({
                                 accounts: accounts
                             });
                         });
                         break;
-                    case "updateAccount":
+                    case 'updateAccount':
                         var account = request.account;
                         accountService.update(account.id, {
                                 username: account.username,
@@ -274,7 +274,7 @@ var chromeService = chromeService || {};
                                 });
                             });
                         break;
-                    case "accountTaskPaused":
+                    case 'accountTaskPaused':
                         accountService.pauseTask(request.id, request.type, request.isPaused)
                             .then(function() {
                                 sendResponse({
@@ -282,7 +282,7 @@ var chromeService = chromeService || {};
                                 });
                             });
                         break;
-                    case "accountTaskCount":
+                    case 'accountTaskCount':
                         accountService.updateTaskCount(request.id, request.type, request.count)
                             .then(function() {
                                 sendResponse({
@@ -290,7 +290,7 @@ var chromeService = chromeService || {};
                                 });
                             });
                         break;
-                    case "loginAccount":
+                    case 'loginAccount':
                         accountService.login(request.account)
                             .then(sendResponse, sendResponse);
                         break;

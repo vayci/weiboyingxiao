@@ -1,8 +1,8 @@
 var queryString = function(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
         results = regex.exec(location.href);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
 var getPageNumber = function() {
@@ -101,8 +101,8 @@ var afterGetCustomers = function() {
         hideLoading();
 
         chrome.runtime.sendMessage({
-            method: "showNotificaton",
-            message: "您需要的前" + pageNumber + "页用户微博数据已经获取完毕！"
+            method: 'showNotificaton',
+            message: '您需要的前' + pageNumber + '页用户微博数据已经获取完毕！'
         }, function(response) {});
     }
 };
@@ -389,8 +389,8 @@ var hideLoading = function() {
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.method === 'fetchCustomers') {
-            if ($(".gn_login").length > 0) {
-                alert("请先登录微博账号再提取数据！");
+            if ($('.gn_login').length > 0) {
+                alert('请先登录微博账号再提取数据！');
                 return;
             }
 
@@ -436,12 +436,12 @@ var getFeedList = function() {
 };
 
 $(function() {
-    var pageCountValue = sessionStorage.getItem("pageCount");
+    var pageCountValue = sessionStorage.getItem('pageCount');
     if (pageCountValue != null) {
         var pageCount = parseInt(pageCountValue);
         var pageNumber = getPageNumber();
         if (pageNumber >= 1 && pageCount >= pageNumber) {
-            checkPageListBeforeGetCustomers(pageNumber, pageCount, $(".searchInp_form").val());
+            checkPageListBeforeGetCustomers(pageNumber, pageCount, $('.searchInp_form').val());
         }
     }
 });

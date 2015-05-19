@@ -1,5 +1,6 @@
-App.controller("TasksController",
-    function($scope, toastr, $state) {
+'use strict';
+
+App.controller('TasksController', function($scope, toastr, $state) {
 
         $scope.allInCurrentPageSelected = false;
         $scope.allSelected = false;
@@ -7,7 +8,7 @@ App.controller("TasksController",
         $scope.tasks = [];
         $scope.count = 0;
 
-        $scope.$watch("allInCurrentPageSelected", function(newValue, oldValue) {
+        $scope.$watch('allInCurrentPageSelected', function(newValue, oldValue) {
             if (newValue == false) {
                 $scope.allSelected = false;
             }
@@ -18,22 +19,22 @@ App.controller("TasksController",
         });
 
         $scope.getTypeText = function(type) {
-            var result = "";
+            var result = '';
             switch (type) {
-                case "follow":
-                    result = "收听";
+                case 'follow':
+                    result = '收听';
                     break;
-                case "forward":
-                    result = "转发";
+                case 'forward':
+                    result = '转发';
                     break;
-                case "message":
-                    result = "私信";
+                case 'message':
+                    result = '私信';
                     break;
-                case "comment":
-                    result = "评论";
+                case 'comment':
+                    result = '评论';
                     break;
-                case "praise":
-                    result = "点赞";
+                case 'praise':
+                    result = '点赞';
                     break;
             }
 
@@ -47,7 +48,7 @@ App.controller("TasksController",
             $.Utils.showSpinner();
 
             chrome.runtime.sendMessage({
-                method: "getTasks",
+                method: 'getTasks',
                 start: 0,
                 pageSize: $scope.count,
                 searchConditions: $scope.searchConditions
@@ -65,13 +66,13 @@ App.controller("TasksController",
 
         $scope.getStatusCss = function(status) {
             switch (status) {
-                case "等待执行":
-                    return "label label-warning";
-                case "已完成":
-                    return "label label-success";
+                case '等待执行':
+                    return 'label label-warning';
+                case '已完成':
+                    return 'label label-success';
             }
 
-            return "label label-danger";
+            return 'label label-danger';
         };
 
 
@@ -85,7 +86,7 @@ App.controller("TasksController",
             var number = pagination.number || 50;
 
             chrome.runtime.sendMessage({
-                method: "getTasks",
+                method: 'getTasks',
                 start: start,
                 pageSize: number,
                 searchConditions: $scope.searchConditions
@@ -131,8 +132,8 @@ App.controller("TasksController",
 
         var storeSearchConditions = function() {
             var searchConditions = $scope.searchConditions;
-            localStorage.taskStatus = searchConditions.taskStatus || "";
-            localStorage.taskType = searchConditions.taskType || "";
+            localStorage.taskStatus = searchConditions.taskStatus || '';
+            localStorage.taskType = searchConditions.taskType || '';
         };
 
         $scope.search = function() {
@@ -144,22 +145,22 @@ App.controller("TasksController",
 
             var ids = getSelectedIds();
             if (ids.length === 0) {
-                toastr.error("请先选择任务！");
+                toastr.error('请先选择任务！');
                 return;
             }
 
-            if (confirm("确定删除所选任务？")) {
+            if (confirm('确定删除所选任务？')) {
 
                 $.Utils.showSpinner();
 
                 chrome.runtime.sendMessage({
-                    method: "deleteTasks",
+                    method: 'deleteTasks',
                     ids: ids
                 }, function(response) {
 
                     $.Utils.hideSpinner();
 
-                    toastr.success("删除任务成功！");
+                    toastr.success('删除任务成功！');
 
                     $state.reload();
                 });

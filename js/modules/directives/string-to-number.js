@@ -1,3 +1,5 @@
+'use strict';
+
 App.directive('stringToNumber', function() {
     return {
         require: 'ngModel',

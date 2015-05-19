@@ -1,13 +1,8 @@
-/**=========================================================
- * Module: utils.js
- * jQuery Utility functions library 
- * adapted from the core of UIKit
- =========================================================*/
+'use strict';
 
 (function($, window, doc) {
-    'use strict';
 
-    var $html = $("html"),
+    var $html = $('html'),
         $win = $(window);
 
     $.support.transition = (function() {
@@ -71,11 +66,11 @@
     $.Utils = {};
 
 
-    $.Utils.showSpinner = function () {
+    $.Utils.showSpinner = function() {
         $('.content-wrapper').addClass('whirl').addClass('traditional');
     };
 
-    $.Utils.hideSpinner = function () {
+    $.Utils.hideSpinner = function() {
         $('.content-wrapper').removeClass('whirl').removeClass('traditional');
     };
 
@@ -151,12 +146,12 @@
 
         if ($.isPlainObject(string)) return string;
 
-        var start = (string ? string.indexOf("{") : -1),
+        var start = (string ? string.indexOf('{') : -1),
             options = {};
 
         if (start != -1) {
             try {
-                options = (new Function("", "var json = " + string.substr(start) + "; return JSON.parse(JSON.stringify(json));"))();
+                options = (new Function('', 'var json = ' + string.substr(start) + '; return JSON.parse(JSON.stringify(json));'))();
             } catch (e) {}
         }
 
@@ -174,7 +169,7 @@
 
         // Install an observer for custom needs of dom changes
         var observer = new $.support.mutationobserver($.Utils.debounce(function(mutations) {
-            $(doc).trigger("domready");
+            $(doc).trigger('domready');
         }, 300));
 
         // pass in the target node, as well as the observer options
@@ -186,6 +181,6 @@
     });
 
     // add touch identifier class
-    $html.addClass($.support.touch ? "touch" : "no-touch");
+    $html.addClass($.support.touch ? 'touch' : 'no-touch');
 
 }(jQuery, window, document));

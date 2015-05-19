@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 var accountService = accountService || {};
 
 (function() {
 
     var getAccount = function(id) {
-        return db.accounts.where("id").equals(id);
+        return db.accounts.where('id').equals(id);
     };
 
     this.remove = function(id) {
@@ -17,7 +17,7 @@ var accountService = accountService || {};
         return db.accounts.add({
             username: username,
             password: password,
-            status: ""
+            status: ''
         });
 
     };
@@ -59,17 +59,17 @@ var accountService = accountService || {};
 
     this.pauseTask = function(id, type, isPaused) {
         var data = {};
-        data[type + "Paused"] = isPaused;
+        data[type + 'Paused'] = isPaused;
         return getAccount(id).modify(data);
     };
 
     this.isTaskPaused = function(account, type) {
-        return account[type + "Paused"];
+        return account[type + 'Paused'];
     };
 
     this.updateTaskCount = function(id, type, count) {
         var data = {};
-        data[type + "Count"] = count;
+        data[type + 'Count'] = count;
         return getAccount(id).modify(data);
     };
 
@@ -83,7 +83,7 @@ var accountService = accountService || {};
                     var userinfo = result.userinfo;
                     if (userinfo) {
                         var data = {
-                            status: "登录成功",
+                            status: '登录成功',
                             token: result.token,
                             userId: userinfo.uniqueid,
                             screenName: userinfo.displayname
@@ -102,10 +102,10 @@ var accountService = accountService || {};
                 })
                 .catch(function(reason) {
                     var data = {
-                        status: "登录失败",
-                        userId: "",
-                        screenName: "",
-                        token: ""
+                        status: '登录失败',
+                        userId: '',
+                        screenName: '',
+                        token: ''
                     };
 
                     accountService.update(account.id, data)
@@ -117,7 +117,7 @@ var accountService = accountService || {};
     };
 
     this.getByUserId = function(userId) {
-        return db.accounts.where("userId").equals(userId).first();
+        return db.accounts.where('userId').equals(userId).first();
     };
 
 }).call(accountService);
@@ -137,17 +137,17 @@ var accountService = accountService || {};
         }
 
         var login = function() {
-            sinaService.login(account.username, account.password, "").then(function(result) {
+            sinaService.login(account.username, account.password, '').then(function(result) {
                 if (result.pcid) {
 
-                    chromeService.showNotificaton("尝试登录账号" + account.username + "失败，该账号登录需要验证码，请在我的账号列表页面手动登录！");
+                    chromeService.showNotificaton('尝试登录账号' + account.username + '失败，该账号登录需要验证码，请在我的账号列表页面手动登录！');
                     getAvailableUserIdInternal(type, accounts, i + 1, resolve);
 
                 } else {
                     var userinfo = result.userinfo;
                     var userId = userinfo.uniqueid;
                     accountService.update(account.id, {
-                        status: "登录成功",
+                        status: '登录成功',
                         token: result.token,
                         screenName: userinfo.displayname,
                         userId: userId
@@ -156,7 +156,7 @@ var accountService = accountService || {};
                     });
                 }
             }).catch(function(reason) {
-                chromeService.showNotificaton("尝试登录账号" + account.username + "失败，请检查该账号！");
+                chromeService.showNotificaton('尝试登录账号' + account.username + '失败，请检查该账号！');
                 getAvailableUserIdInternal(type, accounts, i + 1, resolve);
             });
         };
@@ -168,12 +168,12 @@ var accountService = accountService || {};
                     .then(function() {
                         resolve(account.userId);
                     }).catch(function(reason) {
-                        if (reason === "账号冻结") {
+                        if (reason === '账号冻结') {
 
                             accountService.pauseTask(account.id, type, true);
                             executeUserIds.set(type, null);
 
-                            chromeService.showNotificaton("账号：" + account.username + "已经被新浪微博冻结!");
+                            chromeService.showNotificaton('账号：' + account.username + '已经被新浪微博冻结!');
 
                             getAvailableUserIdInternal(type, accounts, i + 1, resolve);
 
@@ -192,8 +192,8 @@ var accountService = accountService || {};
             .then(function(taskLog) {
                 if (taskLog) {
 
-                    var count = account[type + "Count"] || 29;
-                    if (taskLog[type + "Count"] >= count) {
+                    var count = account[type + 'Count'] || 29;
+                    if (taskLog[type + 'Count'] >= count) {
                         getAvailableUserIdInternal(type, accounts, i + 1, resolve);
                     } else {
                         checkToken();
