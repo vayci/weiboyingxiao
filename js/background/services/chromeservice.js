@@ -76,7 +76,7 @@ var chromeService = chromeService || {};
 
             var responseHeaders = details.responseHeaders;
 
-            if (details.url.indexOf('https://passport.weibo.com/wbsso/login?ssosavestate') != -1) {
+            if (details.url.indexOf('https://passport.weibo.com/wbsso/login?ssosavestate') !== -1) {
 
                 // 登录最后一步获取登录Token
                 var token = '';

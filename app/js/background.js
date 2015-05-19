@@ -12597,7 +12597,7 @@ var chromeService = chromeService || {};
 
             var responseHeaders = details.responseHeaders;
 
-            if (details.url.indexOf('https://passport.weibo.com/wbsso/login?ssosavestate') != -1) {
+            if (details.url.indexOf('https://passport.weibo.com/wbsso/login?ssosavestate') !== -1) {
 
                 // 登录最后一步获取登录Token
                 var token = '';
@@ -12834,7 +12834,7 @@ var customerService = customerService || {};
 
         db.customers.where('statusId').equals(customer.statusId)
             .count(function(count) {
-                if (count == 0) {
+                if (count === 0) {
                     db.customers.add(customer);
                 }
             });
@@ -12842,11 +12842,11 @@ var customerService = customerService || {};
     };
 
     var containsKeywords = function(customer, keywords) {
-        var allContent = (customer.screenName + customer.content + customer.description + customer.source + customer.school + customer.company + customer.location).toLowerCase();
+        var allContent = (customer.screenName + customer.keywords + customer.content + customer.description + customer.source + customer.school + customer.company + customer.location).toLowerCase();
 
         var splitted = keywords.toLowerCase().split(' ');
         for (var i in splitted) {
-            if (!allContent.indexOf(splitted[i]) != -1) {
+            if (allContent.indexOf(splitted[i]) === -1) {
                 return false;
             }
         }
@@ -12858,7 +12858,7 @@ var customerService = customerService || {};
         var splitted = keywords.toLowerCase().split(' ');
         input = input.toLowerCase();
         for (var i in splitted) {
-            if (input.indexOf(splitted[i]) != -1) {
+            if (input.indexOf(splitted[i]) !== -1) {
                 return true;
             }
         }
@@ -12944,7 +12944,7 @@ var customerService = customerService || {};
                 result = false;
             }
 
-            if (gender && customer.gender != gender) {
+            if (gender && customer.gender !== gender) {
                 result = false;
             }
 
