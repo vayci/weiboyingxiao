@@ -1,7 +1,7 @@
-'use strict';
-
 var sinaSSOEncoder = sinaSSOEncoder || {};
 (function() {
+    'use strict';
+
     var a = 0,
         b = 8;
     this.hex_sha1 = function(a) {
@@ -237,6 +237,8 @@ var sinaSSOEncoder = sinaSSOEncoder || {};
 
 
 (function() {
+    'use strict';
+
     function bt(a) {
         var b = bp(a, this.n.bitLength() + 7 >> 3);
         if (b == null)

@@ -1,12 +1,15 @@
 $(function() {
-    var $message = $('#message');
-    var $pageCount = $('#page-count');
+
+    'use strict';
     
+    var $message = $('#message');
+
     var optionHtml = '';
     for (var i = 1; i <= 500; i++) {
         optionHtml += '<option value="' + i + '">前' + i + '页</option>';
     }
 
+    var $pageCount = $('#page-count');
     $pageCount.append(optionHtml).val('50');
 
     var showMessage = function(message, color) {

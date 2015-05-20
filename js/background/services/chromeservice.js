@@ -1,8 +1,8 @@
-'use strict';
-
 var chromeService = chromeService || {};
 
 (function() {
+
+    'use strict';
 
     this.showNotificaton = function(message) {
         chrome.notifications.create('', {

@@ -1,8 +1,8 @@
-'use strict';
-
 var accountService = accountService || {};
 
 (function() {
+
+    'use strict';
 
     var getAccount = function(id) {
         return db.accounts.where('id').equals(id);
@@ -123,6 +123,8 @@ var accountService = accountService || {};
 }).call(accountService);
 
 (function() {
+
+    'use strict';
 
     var getAvailableUserIdInternal = function(type, accounts, i, resolve) {
         if (accounts.length === i) {

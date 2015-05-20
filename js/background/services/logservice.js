@@ -1,8 +1,8 @@
-'use strict';
-
 var logService = logService || {};
 
 (function() {
+    
+    'use strict';
 
     this.getAll = function(start, pageSize) {
 

@@ -1,8 +1,8 @@
-'use strict';
-
 var sinaService = sinaService || {};
 
 (function() {
+
+    'use strict';
 
     var makeNonce = function(a) {
         var b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
@@ -187,6 +187,8 @@ var sinaService = sinaService || {};
 }).call(sinaService);
 
 (function() {
+    'use strict';
+    
     var postData = function(url, data, token) {
         return new Promise(function(resolve, reject) {
             $.ajax({

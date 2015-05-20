@@ -1,8 +1,8 @@
-'use strict';
-
 var taskService = taskService || {};
 
 (function() {
+
+    'use strict';
 
     this.restartAll = function() {
 
@@ -141,6 +141,8 @@ var taskService = taskService || {};
 
 
 (function() {
+
+    'use strict';
 
     var getIntervalTime = function(type) {
         return (localStorage.getItem(type + 'IntervalTime') || 30) * 1000;

@@ -1,9 +1,8 @@
-'use strict';
-
 var customerService = customerService || {};
 
 (function() {
 
+    'use strict';
 
     this.add = function(customer) {
 
