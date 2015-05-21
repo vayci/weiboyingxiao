@@ -175,7 +175,7 @@ var taskService = taskService || {};
         if (type === 'checkTaskNumbers') {
             taskService.getLeftCount().then(function(count) {
                 chromeService.showBadgeText((count || '').toString());
-                chromeService.createAlarm('checkTaskNumbers', 1500);
+                chromeService.createAlarm('checkTaskNumbers', 1000);
             });
 
             return;

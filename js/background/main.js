@@ -1,3 +1,13 @@
+var db = new Dexie('weiboyingxiao');
+db.version(1).stores({
+    logs: '++id,content,createdAt',
+    tasks: '++id,content,userId,statusId,createdAt,triggerTime,failedTimes,status,type,useRandomContent,statusContent',
+    customers: '++id,userId,statusId,url,profileImageUrl,screenName,content,friendsCount,followersCount,statusesCount,description,location,school,company,keywords,source,createdAt,statusLink,attitudesCount,commentsCount,repostsCount,gender,domain,isMember,verified',
+    accounts: '++id,username,password,userId,status',
+    taskLogs: '++id,userId,date'
+});
+db.open();
+
 var executeUserIds = {
     get: function(type) {
         return localStorage.getItem(type + ':UserId');
@@ -15,16 +25,6 @@ var executeUserIds = {
 (function() {
 
     'use strict';
-
-    var db = new Dexie('weiboyingxiao');
-    db.version(1).stores({
-        logs: '++id,content,createdAt',
-        tasks: '++id,content,userId,statusId,createdAt,triggerTime,failedTimes,status,type,useRandomContent,statusContent',
-        customers: '++id,userId,statusId,url,profileImageUrl,screenName,content,friendsCount,followersCount,statusesCount,description,location,school,company,keywords,source,createdAt,statusLink,attitudesCount,commentsCount,repostsCount,gender,domain,isMember,verified',
-        accounts: '++id,username,password,userId,status',
-        taskLogs: '++id,userId,date'
-    });
-    db.open();
 
     chromeService.listenOnBeforeSendHeaders();
     chromeService.listenOnHeadersReceived();
