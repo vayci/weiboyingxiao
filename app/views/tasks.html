@@ -30,7 +30,7 @@
     </div>
     <p>
         <button ng-click="deleteTasks()" class="btn btn-danger">删除</button>
-        总共任务数：{{ count }}
+        总共任务数：{{ count }}, 每页50条
     </p>
     <p class="alert alert-info text-center alert-select-all" ng-show="allInCurrentPageSelected && count > tasks.length">
         <span ng-show="!allSelected">已勾选本页 {{ tasks.length }} 条任务，
