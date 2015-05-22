@@ -292,7 +292,7 @@ a:focus {
 #back-top {
     display: none;
     position: fixed;
-    bottom: 15px;
+    bottom: 80px;
     right: 15px;
     background: rgba(0, 0, 0, 0.7);
     cursor: pointer;
