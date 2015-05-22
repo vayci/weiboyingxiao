@@ -29,8 +29,8 @@ a:focus {
     outline: 0;
 }
 
-.btn-install + .btn-install {
-    margin-left: 8px;
+.btn-install {
+    margin-right: 8px;
 }
 
 @media (max-width: 480px) {
@@ -39,9 +39,6 @@ a:focus {
     }
     hr {
         width: 150px;
-    }
-    .btn-install + .btn-install {
-        margin-left: 0;
     }
 }
 
@@ -122,7 +119,7 @@ a:focus {
 }
 
 .navbar-default .navbar-toggle > .glyphicon {
-    color: #0099e6;
+    color: #7759b3;
 }
 
 .navbar-default .navbar-brand {
@@ -166,7 +163,6 @@ a:focus {
     background-color: transparent;
     color: #06979e;
 }
-/* Header Wrap */
 
 .headerwrap {
     background: url("../img/header-bg.jpg") no-repeat center top;
