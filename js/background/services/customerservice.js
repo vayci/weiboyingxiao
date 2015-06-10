@@ -118,7 +118,7 @@ var customerService = customerService || {};
                 result = false;
             }
 
-            if (gender && customer.gender !== gender) {
+            if (gender && customer.gender != gender) {
                 result = false;
             }
 
