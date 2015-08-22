@@ -61,7 +61,7 @@ var getRepostsCount = function($feed) {
 };
 
 var getProfileUrl = function($feed) {
-    var url = $feed.find('.W_texta.W_fb').attr('href');
+    var url = $feed.find('.W_fb').attr('href');
     if (url.indexOf('http://') == -1) {
         url = 'http://www.weibo.com' + url;
     }
