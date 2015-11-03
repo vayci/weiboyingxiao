@@ -1,6 +1,5 @@
-'use strict';
-
 App.controller('SettingsController', function($scope, toastr) {
+    'use strict';
 
     $scope.settings = {
         praiseIntervalTime: localStorage.praiseIntervalTime || 30,

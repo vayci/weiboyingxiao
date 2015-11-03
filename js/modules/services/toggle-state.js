@@ -1,6 +1,6 @@
-'use strict';
-
 App.service('toggleStateService', function($rootScope) {
+
+    'use strict';
 
     var storageKeyName = 'toggleState';
 

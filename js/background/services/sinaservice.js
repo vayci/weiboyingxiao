@@ -246,7 +246,12 @@ var sinaService = sinaService || {};
     this.follow = function(task, userId, token) {
         return postData('http://www.weibo.com/aj/f/followed?ajwvr=6&__rnd=' + Date.now(), {
             uid: task.userId,
-            oid: task.userId
+            oid: task.userId,
+            f: 0,
+            refer_sort: 'friends',
+            wforce: 1,
+            nogroup: 1,
+            template: 2
         }, token);
     };
 

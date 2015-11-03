@@ -1,6 +1,6 @@
-'use strict';
-
 App.controller('AppController', function($rootScope, $scope, $state, $window, $localStorage, $timeout, toggleStateService) {
+
+    'use strict';
 
     // Hook not found
     $rootScope.$on('$stateNotFound',

@@ -1,6 +1,6 @@
-'use strict';
-
 App.directive('toggleState', function(toggleStateService) {
+
+    'use strict';
 
     return {
         restrict: 'A',

@@ -1,6 +1,6 @@
-'use strict';
-
 App.controller('LogsController', function($scope, toastr, $state) {
+
+    'use strict';
 
     $scope.logs = [];
 

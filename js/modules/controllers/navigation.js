@@ -1,6 +1,6 @@
-'use strict';
-
 App.controller('NavigationController', function($rootScope, $scope, $state) {
+    'use strict';
+
     $scope.menuItems = [{
         'text': '用户的微博列表',
         'sref': 'app.customers'

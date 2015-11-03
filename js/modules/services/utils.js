@@ -1,6 +1,6 @@
-'use strict';
-
 (function($, window, doc) {
+
+    'use strict';
 
     var $html = $('html'),
         $win = $(window);

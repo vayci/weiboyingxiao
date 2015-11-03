@@ -1,6 +1,6 @@
-'use strict';
-
 App.controller('CustomersController', function($scope, toastr, $modal, $filter, $state) {
+
+    'use strict';
 
     $scope.allInCurrentPageSelected = false;
     $scope.allSelected = false;

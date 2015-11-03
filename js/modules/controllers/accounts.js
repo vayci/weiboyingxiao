@@ -1,6 +1,6 @@
-'use strict';
-
 App.controller('AccountsController', function($scope, toastr, $modal) {
+
+    'use strict';
 
     $scope.accounts = [];
 

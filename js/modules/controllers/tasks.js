@@ -1,6 +1,6 @@
-'use strict';
-
 App.controller('TasksController', function($scope, toastr, $state) {
+
+    'use strict';
 
         $scope.allInCurrentPageSelected = false;
         $scope.allSelected = false;
