@@ -107,7 +107,7 @@ var sinaService = sinaService || {};
                 .done(function(result) {
 
                     // 4. save login state
-                    url = findUrls($(result).text())[0];
+                    url = findUrls($(result).text())[1];
                     if (!url){
                         reject('用户名或密码错误！');
                         return;
