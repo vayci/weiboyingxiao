@@ -1,6 +1,7 @@
 [
     "bower_components/jquery/dist/jquery.js",
     "bower_components/dexie/dist/latest/dexie.js",
+    "bower_components/es6-shim/es6-shim.min.js",
     "js/background/services/accountservice.js",
     "js/background/services/chromeservice.js",
     "js/background/services/customerservice.js",
