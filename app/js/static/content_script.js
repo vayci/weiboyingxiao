@@ -72,8 +72,8 @@ var getProfileUrl = function($feed) {
 var getUserId = function($feed) {
     var usercard = $feed.find('.face img').attr('usercard');
     var userId = 0;
-    if (usercard.lastIndexOf('&') != -1) {
-        userId = usercard.substring(3, usercard.lastIndexOf('&'));
+    if (usercard.indexOf('&') != -1) {
+        userId = usercard.substring(3, usercard.indexOf('&'));
     } else {
         userId = usercard.substring(3);
     }
