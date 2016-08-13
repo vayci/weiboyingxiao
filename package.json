@@ -1,0 +1,57 @@
+{
+  "name": "weiboyingxiao",
+  "version": "1.0.0",
+  "description": "A Chrome extension you can use to broadcast your information to Sina Weibo users by executing some tasks.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-bootstrap": "^0.12.2",
+    "angular-cookies": "^1.5.8",
+    "angular-resource": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "angular-smart-table": "^2.1.8",
+    "angular-toastr": "^2.0.0",
+    "angular-ui-router": "^0.3.1",
+    "angular-ui-utils": "^0.1.1",
+    "angular-xeditable": "^0.2.0",
+    "angularjs": "^0.0.1",
+    "bootstrap": "^3.3.7",
+    "dexie": "^1.4.1",
+    "es6-shim": "^0.35.1",
+    "jquery": "^3.1.0",
+    "ng-dexie": "^0.0.18",
+    "ngstorage": "^0.3.11",
+    "oclazyload": "^1.0.9",
+    "whirl": "^1.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-changed": "^1.2.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-expect-file": "^0.0.7",
+    "gulp-filter": "^2.0.2",
+    "gulp-ng-annotate": "^0.5.2",
+    "gulp-rename": "^1.2.0",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-sync": "^0.1.4",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "gulp-w3cjs": "^0.3.0",
+    "through2": "^0.6.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wenbinke/weiboyingxiao.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wenbinke/weiboyingxiao/issues"
+  },
+  "homepage": "https://github.com/wenbinke/weiboyingxiao#readme"
+}
