@@ -1,4 +1,4 @@
-App.controller('CustomersController', function($scope, toastr, $modal, $filter, $state) {
+App.controller('CustomersController', function($scope, toastr, $uibModal, $filter, $state) {
 
     'use strict';
 
@@ -133,7 +133,7 @@ App.controller('CustomersController', function($scope, toastr, $modal, $filter, 
             return;
         }
 
-        $modal.open({
+        $uibModal.open({
             templateUrl: templateUrl,
             controller: controller,
             resolve: {
@@ -288,7 +288,7 @@ App.controller('CustomersController', function($scope, toastr, $modal, $filter, 
     };
 });
 
-var modalConfirm = function($scope, $modalInstance, type, items, toastr, message) {
+var modalConfirm = function($scope, $uibModalInstance, type, items, toastr, message) {
     $.Utils.showSpinner();
 
     chrome.runtime.sendMessage({
@@ -300,7 +300,7 @@ var modalConfirm = function($scope, $modalInstance, type, items, toastr, message
     }, function(response) {
         $scope.$apply(function() {
 
-            $modalInstance.close();
+            $uibModalInstance.close();
 
             toastr.success(message);
 
@@ -310,7 +310,7 @@ var modalConfirm = function($scope, $modalInstance, type, items, toastr, message
     });
 };
 
-App.controller('CommentModalController', function($scope, $modalInstance, items, toastr) {
+App.controller('CommentModalController', function($scope, $uibModalInstance, items, toastr) {
 
     $scope.useRandomContent = true;
     $scope.content = '';
@@ -322,29 +322,29 @@ App.controller('CommentModalController', function($scope, $modalInstance, items,
             return;
         }
 
-        modalConfirm($scope, $modalInstance, 'comment', items, toastr, '添加评论任务成功，任务已经在任务列表中等待执行！');
+        modalConfirm($scope, $uibModalInstance, 'comment', items, toastr, '添加评论任务成功，任务已经在任务列表中等待执行！');
     };
 
     $scope.cancel = function() {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
     };
 });
 
-App.controller('ForwardModalController', function($scope, $modalInstance, items, toastr) {
+App.controller('ForwardModalController', function($scope, $uibModalInstance, items, toastr) {
 
     $scope.useRandomContent = true;
     $scope.content = '';
 
     $scope.ok = function() {
-        modalConfirm($scope, $modalInstance, 'forward', items, toastr, '添加转发任务成功，任务已经在任务列表中等待执行！');
+        modalConfirm($scope, $uibModalInstance, 'forward', items, toastr, '添加转发任务成功，任务已经在任务列表中等待执行！');
     };
 
     $scope.cancel = function() {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
     };
 });
 
-App.controller('MessageModalController', function($scope, $modalInstance, items, toastr) {
+App.controller('MessageModalController', function($scope, $uibModalInstance, items, toastr) {
 
     $scope.content = '';
 
@@ -365,7 +365,7 @@ App.controller('MessageModalController', function($scope, $modalInstance, items,
         }, function(response) {
             $scope.$apply(function() {
 
-                $modalInstance.close();
+                $uibModalInstance.close();
 
                 toastr.success('添加私信任务成功，任务已经在任务列表中等待执行！');
 
@@ -376,6 +376,6 @@ App.controller('MessageModalController', function($scope, $modalInstance, items,
     };
 
     $scope.cancel = function() {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
     };
 });

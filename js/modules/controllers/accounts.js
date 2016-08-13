@@ -1,4 +1,4 @@
-App.controller('AccountsController', function($scope, toastr, $modal) {
+App.controller('AccountsController', function($scope, toastr, $uibModal) {
 
     'use strict';
 
@@ -201,7 +201,7 @@ App.controller('AccountsController', function($scope, toastr, $modal) {
 
     $scope.showTaskLog = function(account) {
 
-        $modal.open({
+        $uibModal.open({
             templateUrl: 'task-logs-modal.html',
             controller: 'TaskLogsController',
             resolve: {
@@ -213,7 +213,7 @@ App.controller('AccountsController', function($scope, toastr, $modal) {
     }
 });
 
-App.controller('TaskLogsController', function($scope, $modalInstance, account) {
+App.controller('TaskLogsController', function($scope, $uibModalInstance, account) {
 
     $scope.taskLogs = [];
     $scope.account = account;
@@ -234,6 +234,6 @@ App.controller('TaskLogsController', function($scope, $modalInstance, account) {
     });
 
     $scope.cancel = function() {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
     };
 });

@@ -1,4 +1,4 @@
-var App = angular.module('weiboMarketing', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngSanitize',
+var App = angular.module('weiboMarketing', ['ngAnimate', 'ngStorage', 'ngSanitize',
     'ngCookies', 'ui.bootstrap', 'ui.router', 'ngResource', 'xeditable', 'toastr', 'smart-table'
 ])
 .config([
