@@ -143,9 +143,9 @@ var getProfileCustomer = function($feedList, index) {
     var createdAt = $feed.find('a[node-type="feed_list_item_date"]').attr('title');
     var source = $feed.find('a[action-type="app_source"]').text();
 
-    var $from = $feed.find('.WB_feed_detail .content > .feed_from a');
+    var $from = $feed.find('.WB_feed_detail .content .feed_from a');
     if ($from.length == 0) {
-        $from = $feed.find('.WB_feed_detail .WB_detail > .WB_from a');
+        $from = $feed.find('.WB_feed_detail .WB_detail .WB_from a');
     }
 
     var statusLink = getStatusLink($from);
@@ -248,9 +248,9 @@ var getCustomer = function($feedList, keywords, index) {
     var screenName = $feed.find('.W_fb').attr('title');
     var content = $feed.find('[node-type="feed_list_content"]').html();
 
-    var $from = $feed.find('.WB_feed_detail .content > .feed_from a');
+    var $from = $feed.find('.WB_feed_detail .content .feed_from a');
     if ($from.length == 0) {
-        $from = $feed.find('.WB_feed_detail .WB_detail > .WB_from a');
+        $from = $feed.find('.WB_feed_detail .WB_detail .WB_from a');
     }
 
     var statusId = $feed.find('div[action-type="feed_list_item"]').attr('mid');
