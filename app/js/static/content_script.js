@@ -62,8 +62,8 @@ var getRepostsCount = function($feed) {
 
 var getProfileUrl = function($feed) {
     var url = $feed.find('.W_fb').attr('href');
-    if (url.indexOf('http://') == -1) {
-        url = 'http://www.weibo.com' + url;
+    if (url.indexOf('https://') == -1) {
+        url = 'https:' + url;
     }
 
     return url;
@@ -83,8 +83,8 @@ var getUserId = function($feed) {
 
 var getStatusLink = function($from) {
     var statusLink = $from.eq(0).attr('href');
-    if (statusLink.indexOf('http://') === -1) {
-        statusLink = 'http://www.weibo.com' + statusLink;
+    if (statusLink.indexOf('https://') === -1) {
+        statusLink = 'https:' + statusLink;
     }
 
     return statusLink;
@@ -242,7 +242,7 @@ var getCustomer = function($feedList, keywords, index) {
 
     var url = getProfileUrl($feed);
 
-    var profileImageUrl = $feed.find('.face img').attr('src');
+    var profileImageUrl = 'https:'+$feed.find('.face img').attr('src');
     var userId = getUserId($feed);
 
     var screenName = $feed.find('.W_fb').attr('title');
@@ -264,7 +264,7 @@ var getCustomer = function($feedList, keywords, index) {
 
     var verified = $feed.find('.approve').length > 0 || $feed.find('.approve_co').length > 0;
 
-    var getDetailUrl = 'http://www.weibo.com/aj/user/newcard?id=' + userId;
+    var getDetailUrl = 'https://www.weibo.com/aj/user/newcard?id=' + userId;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", getDetailUrl, true);
     xhr.onreadystatechange = function() {

@@ -37,7 +37,7 @@ $(function() {
                 method: 'fetchCustomers',
                 pageCount: parseInt($pageCount.val())
             }, function(response) {
-                showMessage('正在提取用户...', 'green');
+                showMessage('正在提取用户...'+parseInt($pageCount.val()), 'green');
             });
         });
     });

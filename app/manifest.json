@@ -5,7 +5,7 @@
   "version": "6.3",
   "content_scripts": [
     {
-      "matches": ["http://*.weibo.com/*"],
+      "matches": ["http://*.weibo.com/*","https://*.weibo.com/*"],
       "js": ["js/static/jquery.min.js", "js/static/content_script.js"],
       "css": ["css/content.css"]
     }
