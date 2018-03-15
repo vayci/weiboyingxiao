@@ -178,6 +178,7 @@ var chromeService = chromeService || {};
 				value: t
 			})
 		};
+	//修改Header
 	this.listenOnBeforeSendHeaders = function() {
 		chrome.webRequest.onBeforeSendHeaders.addListener(function(s) {
 			var t = s.requestHeaders,
@@ -187,11 +188,11 @@ var chromeService = chromeService || {};
 						"extension-cookies" === o.name && (t.splice(s, 1), e(t, "Cookie", o.value))
 					}
 				};
-			return o(), s.url.indexOf("http://www.weibo.com/aj") !== -1 ? (e(s.requestHeaders, "Referer", "http://www.weibo.com"), e(t, "Origin", "http://www.weibo.com")) : s.url.indexOf("https://login.sina.com.cn/crossdomain2.php") !== -1 ? (e(s.requestHeaders, "Referer", "http://www.weibo.com"), e(t, "Origin", "https://login.sina.com.cn")) : s.url.indexOf("https://passport.weibo.com/wbsso/login?ssosavestate") !== -1 && (e(s.requestHeaders, "Referer", "http://www.weibo.com"), e(t, "Origin", "https://passport.weibo.com")), {
+			return o(), s.url.indexOf("https://weibo.com/aj") !== -1 ? (e(s.requestHeaders, "Referer", "http://www.weibo.com"), e(t, "Origin", "http://www.weibo.com")) : s.url.indexOf("https://login.sina.com.cn/crossdomain2.php") !== -1 ? (e(s.requestHeaders, "Referer", "http://www.weibo.com"), e(t, "Origin", "https://login.sina.com.cn")) : s.url.indexOf("https://passport.weibo.com/wbsso/login?ssosavestate") !== -1 && (e(s.requestHeaders, "Referer", "http://www.weibo.com"), e(t, "Origin", "https://passport.weibo.com")), {
 				requestHeaders: t
 			}
 		}, {
-			urls: ["http://www.weibo.com/aj*&__from=extension", "https://login.sina.com.cn/*&__from=extension", "https://passport.weibo.com/wbsso/login?ssosavestate*&__from=extension*"]
+			urls: ["https://weibo.com/aj*&__from=extension", "https://login.sina.com.cn/*&__from=extension", "https://passport.weibo.com/wbsso/login?ssosavestate*&__from=extension*"]
 		}, ["blocking", "requestHeaders"])
 	}, this.listenOnHeadersReceived = function() {
 		chrome.webRequest.onHeadersReceived.addListener(function(s) {
@@ -580,13 +581,10 @@ var sinaService = sinaService || {};
 				console.log(t);
 			return new Promise(function(o, r) {
 				$.ajax({
-					url: e ,
-					// url: e + "&__from=extension",
+					url: e + "&__from=extension",
 					type: "POST",
 					headers: {
-						// "extension-cookies": n
-						"Origin": "https://weibo.com",
-						"Referer": "https://weibo.com/2512636344/G7shBf0MA?refer_flag=1001030103_&type=comment"
+						"extension-cookies": n
 					},
 					data: t
 				}).done(function(e, t, n) {
