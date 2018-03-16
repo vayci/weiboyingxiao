@@ -79,7 +79,6 @@ var accountService = accountService || {};
 	}, this.login = function(e) {
 		return new Promise(function(n, t) {
 			sinaService.login(e.username, e.password, e.pincode).then(function(t) {
-				console.log(t);
 				var i = t.userinfo;
 				if (i) {
 					var u = {
@@ -577,8 +576,6 @@ var sinaService = sinaService || {};
 }).call(sinaService), function() {
 	"use strict";
 	var e = function(e, t, n) {
-		console.log("ajax begin");
-				console.log(t);
 			return new Promise(function(o, r) {
 				$.ajax({
 					url: e + "&__from=extension",
@@ -588,7 +585,6 @@ var sinaService = sinaService || {};
 					},
 					data: t
 				}).done(function(e, t, n) {
-					console.log("ajax res");
 					"100000" === e.code ? o(e) : r(e.msg)
 				}).fail(function(e) {
 					var t = e.getResponseHeader("redirect-location");
@@ -613,7 +609,6 @@ var sinaService = sinaService || {};
 			mid: t.statusId
 		}, o)
 	}, this.follow = function(t, n, o) {
-		console.log("follow");
 		var param = {
 			uid: t.userId,
 			objectid: null,
@@ -630,7 +625,6 @@ var sinaService = sinaService || {};
 			mark: null,
 			_t:0
 		};
-		console.log(param);
 		var res = e("https://weibo.com/aj/f/followed?ajwvr=6&__rnd=" + Date.now(), param, o);
 		return res;
 	}, this.unfollow = function(t, n, o) {
@@ -697,8 +691,6 @@ var taskService = taskService || {};
 		})
 	};
 	var e = function(e,sc, t, s, n, r, i, a) {
-		console.log("yingyingying")
-		console.log(sc);
 			db.tasks.where("userId").equals(e).and(function(e) {
 				return e.type == a
 			}).count().then(function(u) {
@@ -724,7 +716,7 @@ var taskService = taskService || {};
 		};
 	this.addAll = function(t, s, n, r) {
 		var i = null;
-		for (var a in r) i = r[a], console.log(i);e(i.userId,i.screenName,i.statusId, i.statusLink, s, n, i.statusContent, t)
+		for (var a in r) i = r[a], e(i.userId,i.screenName,i.statusId, i.statusLink, s, n, i.statusContent, t)
 	}, this.getLogs = function(e) {
 		return db.taskLogs.where("userId").equals(e).toArray()
 	}, this.getLeftCount = function() {
@@ -789,8 +781,6 @@ var taskService = taskService || {};
 							(e[r] || 29) <= i && executeUserIds.set(n, null)
 						})
 					})["catch"](function(t) {
-						console.log('catch');
-						console.log(t);
 						var i = "等待执行";
 						switch (t) {
 						case "账号冻结":

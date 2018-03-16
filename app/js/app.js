@@ -165,10 +165,16 @@ App.config(["$stateProvider", "$urlRouterProvider", "$controllerProvider", "$com
 	}
 }]), App.controller("CustomersController", ["$scope", "toastr", "$uibModal", "$filter", "$state", function(t, e, n, o, s) {
 	"use strict";
-	t.allInCurrentPageSelected = !1, t.allSelected = !1, t.allCustomers = [], t.customers = [], t.count = 0, t.$watch("allInCurrentPageSelected", function(e, n) {
+	t.allInCurrentPageSelected = !1, 
+	t.allSelected = !1, 
+	t.allCustomers = [], 
+	t.customers = [], 
+	t.count = 0, 
+	t.$watch("allInCurrentPageSelected", function(e, n) {
 		e === !1 && (t.allSelected = !1);
 		for (var o in t.customers) t.customers[o].isSelected = e
-	}), t.selectAll = function() {
+	}), 
+	t.selectAll = function() {
 		t.allSelected = !0, $.Utils.showSpinner(), chrome.runtime.sendMessage({
 			method: "getCustomers",
 			start: 0,
@@ -177,9 +183,11 @@ App.config(["$stateProvider", "$urlRouterProvider", "$controllerProvider", "$com
 		}, function(e) {
 			t.allCustomers = e.list, $.Utils.hideSpinner()
 		})
-	}, t.cancelSelectAll = function() {
+	}, 
+	t.cancelSelectAll = function() {
 		t.allSelected = !1
-	}, t.searchConditions = {
+	}, 
+	t.searchConditions = {
 		keywords: localStorage.keywords,
 		filters: localStorage.filters,
 		statusesCountMin: localStorage.statusesCountMin,
@@ -240,8 +248,6 @@ App.config(["$stateProvider", "$urlRouterProvider", "$controllerProvider", "$com
 			return e.innerHTML = t, e.textContent || e.innerText || ""
 		},
 		c = function(t) {
-			console.log("push");
-			console.log(t);
 			return {
 				statusId: t.statusId,
 				userId: t.userId,
@@ -381,9 +387,7 @@ App.controller("CommentModalController", ["$scope", "$uibModalInstance", "items"
 }]), App.controller("AppController", ["$rootScope", "$scope", "$state", "$window", "$localStorage", "$timeout", "toggleStateService", function(t, e, n, o, s, r, a) {
 	"use strict";
 	t.$on("$stateNotFound", function(t, e, n, o) {
-		console.log(e.to), console.log(e.toParams), console.log(e.options)
 	}), t.$on("$stateChangeError", function(t, e, n, o, s, r) {
-		console.log(r)
 	}), t.$on("$stateChangeSuccess", function(e, s, r, a, i) {
 		o.scrollTo(0, 0), t.currTitle = n.current.title
 	}), t.currTitle = n.current.title, t.pageTitle = function() {
