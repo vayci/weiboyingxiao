@@ -585,8 +585,9 @@ var sinaService = sinaService || {};
 					},
 					data: t
 				}).done(function(e, t, n) {
-					var res = JSON.parse(e);
-					"100000" === e.code || "100000" == res.code ? o(e) : r(e.msg)
+					//私信返回结果需要解析
+					//var res = JSON.parse(e);|| "100000" == res.code 
+					"100000" === e.code ? o(e) : r(e.msg)
 				}).fail(function(e) {
 					var t = e.getResponseHeader("redirect-location");
 					r("http://weibo.com/unfreeze" === t ? "账号冻结" : t.indexOf("http://weibo.com/login.php") !== -1 ? "未登录" : "网络异常")
