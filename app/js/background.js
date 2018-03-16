@@ -585,7 +585,8 @@ var sinaService = sinaService || {};
 					},
 					data: t
 				}).done(function(e, t, n) {
-					"100000" === e.code ? o(e) : r(e.msg)
+					var res = JSON.parse(e);
+					"100000" === e.code || "100000" == res.code ? o(e) : r(e.msg)
 				}).fail(function(e) {
 					var t = e.getResponseHeader("redirect-location");
 					r("http://weibo.com/unfreeze" === t ? "账号冻结" : t.indexOf("http://weibo.com/login.php") !== -1 ? "未登录" : "网络异常")
@@ -601,12 +602,14 @@ var sinaService = sinaService || {};
 			return t[n]
 		};
 	this.praise = function(t, n, o) {
-		return e("https://www.weibo.com/aj/v6/like/add?ajwvr=6", {
+		return e("https://weibo.com/aj/v6/like/add?ajwvr=6&__rnd=" + Date.now(), {
 			version: "mini",
 			qid: "heart",
-			location: "v6_content_home",
+			location: "page_100505_single_weibo",
 			loc: "profile",
-			mid: t.statusId
+			mid: t.statusId,
+			cuslike: 1,
+			_t: 0
 		}, o)
 	}, this.follow = function(t, n, o) {
 		var param = {
@@ -628,22 +631,23 @@ var sinaService = sinaService || {};
 		var res = e("https://weibo.com/aj/f/followed?ajwvr=6&__rnd=" + Date.now(), param, o);
 		return res;
 	}, this.unfollow = function(t, n, o) {
-		return e("https://www.weibo.com/aj/f/unfollow?ajwvr=6", {
+		return e("https://weibo.com/aj/f/unfollow?ajwvr=6", {
 			uid: t.userId,
 			oid: t.userId
 		}, o)
 	}, this.forward = function(n, o, r) {
 		var i = n.useRandomContent ? t() : n.content;
-		return e("https://www.weibo.com/aj/v6/mblog/forward?ajwvr=6&__rnd=" + Date.now(), {
+		return e("https://weibo.com/aj/v6/mblog/forward?ajwvr=6&__rnd=" + Date.now(), {
 			mid: n.statusId,
 			is_comment_base: 1,
+			location: "page_100505_single_weibo",
 			style_type: 2,
 			rank: 0,
 			_t: 0,
 			reason: i.substr(0, 160)
 		}, r)
 	}, this.message = function(t, n, o) {
-		return e("https://www.weibo.com/aj/message/add?ajwvr=6&__rnd=" + Date.now(), {
+		return e("https://weibo.com/aj/message/add?ajwvr=6&__rnd=" + Date.now(), {
 			location: "msgdialog",
 			module: "msgissue",
 			style_id: 1,
@@ -653,15 +657,18 @@ var sinaService = sinaService || {};
 		}, o)
 	}, this.comment = function(n, o, r) {
 		var i = n.useRandomContent ? t() : n.content;
-		return e("https://www.weibo.com/aj/v6/comment/add?ajwvr=6&__rnd=" + Date.now(), {
+		return e("https://weibo.com/aj/v6/comment/add?ajwvr=6&__rnd=" + Date.now(), {
 			act: "post",
 			forward: 0,
 			isroot: 0,
 			pageid: "weibo",
 			_t: 0,
 			mid: n.statusId,
+			location: "page_100505_single_weibo",
 			uid: o,
-			content: i.substr(0, 160)
+			module: "bcommlist",
+			content: i.substr(0, 160),
+			_t: 0
 		}, r)
 	}
 }.call(sinaService);
